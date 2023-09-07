@@ -1,0 +1,31 @@
+import requests
+from bs4 import BeautifulSoup
+url = "https://learncodinganywhere.com/"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+title_element = soup.find('title')
+if title_element:
+    page_title = title_element.text
+    print("Page Title:", page_title)
+else:
+    print("Page title not found.")
+
+url = "https://learncodinganywhere.com/codingbootcamps"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+title_element = soup.find('title')
+if title_element:
+    page_title = title_element.text
+    print("Page Title:", page_title)
+else:
+    print("Page title not found.")
+
+url = "https://linkedin.com"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, 'html.parser')
+footer_element = soup.find('footer')
+if footer_element:
+    footer_title = footer_element.text
+    print("Footer Title:", footer_title)
+else:
+    print("Footer title not found.")
