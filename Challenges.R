@@ -57,3 +57,29 @@ new_car <- data.frame(hp = 150) #create data frame with 150 hp
 predicted_mpg <- predict(model, newdata = new_car) #predict the mpg for the new car
 cat("The predicted MPG for a car with 150 hp is:", predicted_mpg) #print predicted mpg
 
+#Challenge 8
+
+#load the iris dataset
+data(iris)
+
+#set seed for reproducibility
+set.seed(123)
+
+#split the dataset into training and testing sets
+sample_indices <- sample(1:nrow(iris), 0.7 * nrow(iris))
+train_data <- iris[sample_indices, ]
+test_data <- iris[-sample_indices, ]
+
+#load the required library for k-NN
+library(class)
+
+#train a k-nn classifier with k=3 using the training set
+k <- 3
+knn_model <- knn(train_data[, 1:4], test_data[, 1:4], train_data[, 5], k)
+
+#make predictions on the testing set
+predicted_species <- levels(train_data[, 5])[knn_model]
+
+#calculate the accuracy of the model
+accuracy <- mean(predicted_species == test_data[, 5])
+cat("Accuracy of the k-NN model (k =", k, "):", round(accuracy * 100, 2), "%\n")
