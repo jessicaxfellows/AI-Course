@@ -50,3 +50,10 @@ summary(iris)
 #scatter plot of sepal length and width
 plot(iris$Sepal.Length, iris$Sepal.Width, xlab = "Sepal Length", ylab = "Sepal Width", main = "Scatter Plot of Sepal Length vs. Width")
 
+#Challenge 7
+#linear regression model training and prediction
+model <- lm(mpg ~ hp, data = mtcars) #train a linear regression model
+new_car <- data.frame(hp = 150) #create data frame with 150 hp
+predicted_mpg <- predict(model, newdata = new_car) #predict the mpg for the new car
+cat("The predicted MPG for a car with 150 hp is:", predicted_mpg) #print predicted mpg
+
