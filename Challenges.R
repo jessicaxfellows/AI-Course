@@ -83,3 +83,15 @@ predicted_species <- levels(train_data[, 5])[knn_model]
 #calculate the accuracy of the model
 accuracy <- mean(predicted_species == test_data[, 5])
 cat("Accuracy of the k-NN model (k =", k, "):", round(accuracy * 100, 2), "%\n")
+
+#Challenge 9
+#load the mtcars dataset
+data(mtcars)
+#standardize the data (center/scale to unit variance)
+mtcars_scaled <- scale(mtcars)
+#perform pca
+pca_result <- prcomp(mtcars_scaled, center = TRUE, scale. = TRUE)
+#extract the first 2 principal components
+pca_components <- pca_result$x[, 1:2]
+#create a scatter plot of the first two principal components
+plot(pca_components, pch = 19, col = mtcars$mpg, main = "PCA of mtcars Dataset", xlab = "Principal Component 1", ylab = "Principal Component 2")
