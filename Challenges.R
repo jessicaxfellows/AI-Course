@@ -95,3 +95,25 @@ pca_result <- prcomp(mtcars_scaled, center = TRUE, scale. = TRUE)
 pca_components <- pca_result$x[, 1:2]
 #create a scatter plot of the first two principal components
 plot(pca_components, pch = 19, col = mtcars$mpg, main = "PCA of mtcars Dataset", xlab = "Principal Component 1", ylab = "Principal Component 2")
+
+#Challenge 10
+#load the required libraries
+library(e1071)
+#load the iris dataset
+data(iris)
+# preprocessing: splitting the dataset features and target variable
+features <- iris[, -5] #exclude species column
+target <- iris$Species
+#train a naive bayes classifier
+nb_model <- naiveBayes(features, target)
+#create new data for prediction (example)
+new_data <- data.frame (
+  Sepal.Length = 5.1,
+  Sepal.Width = 3.5,
+  Petal.Length = 1.4,
+  Petal.Width = 0.2
+)
+#make a prediction using the trained model
+prediction <- predict(nb_model, new_data)
+#print predicted category
+print(prediction)
