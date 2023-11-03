@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Website</title>
+    <style>
+        /* Your CSS styles go here */
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            color: white;
+            background-color: lightblue;
+            font-size: 14px; /* Font size 14 pixels */
+            text-align: center;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100; /* Ensures the navbar appears above other elements */
+            background-color: pink;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav li {
+            margin: 0 10px;
+        }
+
+        img {
+            object-fit: cover;
+            width: 200px; /* Set the width of the square images */
+            height: 200px; /* Set the height of the square images */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Drop shadow effect */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transition for hover effect */
+        }
+
+        img:hover {
+            transform: scale(1.05); /* Hover effect: Scale up the image by 5% */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .scroll-to-top-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: pink;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="#home">HOME</a>
+        <a href="#roses">ROSES</a>
+        <a href="#tulips">TULIPS</a>
+        <a href="#lilies">LILIES</a>
+        <a href="#sunflowers">SUNFLOWERS</a>
+        <a href="#orchids">ORCHIDS</a>
+        <a href="#about">ABOUT US</a>
+        <a href="#contact">CONTACT</a>
+    </nav>
+
+    <section id="home">
+        <h1>Welcome to the Flower World!</h1>
+        <!-- Home content -->
+    </section>
+
+    <section id="roses">
+        <h2>Roses</h2>
+        <img data-src="data:image/jpeg;base64,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" alt="Rose">
+        <p>Roses, one of the most iconic and beloved flowers in the world, have a rich history dating back thousands of years. The cultivation of roses began in ancient civilizations such as China, Persia, and Egypt. The ancient Greeks and Romans revered roses and associated them with their goddesses of love—Aphrodite and Venus. During the Roman Empire, roses were used for various purposes, including ornamental decoration, medicinal remedies, and perfumes. In the 15th century, the War of Roses in England derived its name from the white and red roses, symbolizing the rival houses of York and Lancaster. Over the centuries, roses have been bred and hybridized, leading to the vast array of colors, shapes, and fragrances we see today.</p>
+        
+        <p>Roses are not only admired for their beauty but also carry deep symbolism. They represent love, passion, and romance, making them a popular choice for expressing affection and admiration. With their enchanting fragrance and elegant appearance, roses have inspired poets, artists, and lovers throughout history. Today, roses are cultivated worldwide, and various species and hybrids are grown for ornamental purposes, cut flowers, and even for their essential oils used in perfumes and cosmetics, continuing their legacy as the "queen of flowers."</p>
+    </section>
+    </section>
+
+    <section id="tulips">
+        <h2>Tulips</h2>
+        <img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_lNC7vQwWFX2TsrmaDUGohzPmBg8Rkcn8N5i1b9IzWJhfvEz9YHRqB14iuA3Y6qYGyKA&usqp=CAU" alt="Tulip">
+        <p>Tulips, native to Central Asia and Turkey, have a fascinating history that dates back to the Ottoman Empire in the 16th century. The flower's name, "tulip," is believed to have been derived from the Persian word "dulband," meaning turban, due to its turban-like shape. Tulips made their way to Europe in the 16th century when botanists began cultivating and studying them. During the Dutch Golden Age in the 17th century, tulips became highly sought after and a symbol of wealth. This period is famously known as "Tulip Mania," where tulip bulbs were traded at exorbitant prices, leading to a speculative bubble that eventually burst. Despite this, tulips remained beloved flowers, admired for their vibrant colors and unique petal shapes.</p>
+
+        <p>Today, tulips are widely cultivated and come in an array of colors, including red, yellow, purple, and white. They are a symbol of spring and are often associated with new beginnings and renewal. Tulip festivals, especially in the Netherlands, attract visitors from all over the world, showcasing the beauty and diversity of this enchanting flower. With their graceful appearance and historical significance, tulips continue to capture the hearts of people globally, making them a popular choice in gardens, bouquets, and floral arrangements.</p>
+    </section>
+
+    </section>
+
+    <section id="lilies">
+        <h2>Lilies</h2>
+        <img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1-4hbwSVAl3wIR9JecKs9pTfqCUwDxWxeQbfF5OXsPpkLa33iKPCBiWctb-5qtI0wBDI&usqp=CAU" alt="Lily">
+        <p>Lilies, known for their elegant and striking appearance, have a fascinating history and cultural significance. These flowers have been cultivated for thousands of years and hold a special place in various mythologies and religions. In ancient Greek mythology, lilies were believed to have sprung from the milk of Hera, the queen of the gods. In Christian traditions, lilies are often associated with the Virgin Mary, symbolizing purity and virtue. In addition to their symbolism, lilies are admired for their graceful petals and delightful fragrance, making them a popular choice for weddings, religious ceremonies, and floral arrangements.</p>
+
+        <p>The cultivation of lilies spread across different parts of the world, including Europe and Asia, where various species and hybrids were developed. Lilies come in a diverse range of colors, from pure white and vibrant yellow to deep red and pink. They bloom in different shapes, such as trumpet, oriental, and asiatic, each with its unique charm. Lilies continue to be cherished for their beauty and symbolism, making them a timeless flower that captivates people's hearts and gardens alike.</p>
+    </section>
+
+    <section id="sunflowers">
+        <h2>Sunflowers</h2>
+        <img data-src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUTEhMVFRUXGBcWFRcXFhUXFRcWFxUWFxUVFxUYHSggGBolGxUVITEhJSkrLi4vFx8zODMtNygtLisBCgoKDg0OGxAQGy0lICUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKgBLAMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAAFBgMEAAIHAQj/xABBEAABAwIEBAQEBAMFBwUAAAABAAIRAwQFEiExBkFRYRMicZEygaGxFELB0VJi8BUjguHxBxYzQ3KisiRjc5Kz/8QAGwEAAgMBAQEAAAAAAAAAAAAAAwQBAgUGAAf/xAAxEQACAQIEAwcEAgMBAQAAAAABAgADEQQSITEFQVETImFxgZHwobHB0TLxFCPhM3L/2gAMAwEAAhEDEQA/AGirVDWlAqlXxCUar28qoaLWr5vSZVHjOiMFW1oS4zsi9KoGbKINn4QpWWxjVEqPm/lIBtKN5ixBRTCrkvAKH3WH5iiuG2+UaKtU0+z0GsstwYQyLzwRC0L4UX4zWEkFY7S0nyqG7Oi9FZDcTvQ3dXpoS08dJUc1znaI1Z0tEGsLgEo3TrCEavcd2CUSSpRChIapjWkIbcHXRBQE7yxNpZ0XjqZQ9uYGeSvUq6IyEbSqteaFhWNYFarUHCJHxAEeh/VRNoEHVQGFt5Yaz1sBY5wW9RkqtWpaKBYyxFhNakLwRCrvpGFWZmmCjhLjeCzSw9gKhywVsGFaPRBL3kviqUAFDHsduFLbVCTBUlNLieveEDbTson0CFdt3LW8qQgB2vaTaQ06ZWtSrChFythTnUq+U856RuqytmbrdlIL1tAgqbielukAVKyjqoGNKkoOImUBvCel6kwKCu3ot6PdR1eaEN5M0pVhMFWhQCEUqLs8oxTmFaqANjKBryh4wyyqbnyqtnV8sEqwxsJnIFJlcwaSscAJKibiAJheXNq9zfKgow+o10mUSnTRr3Mo7lY10IKvtgDRLNC4fIAlXDUqjWEvUoHrCLUBFzLtxWhUS/WQtG5n6kQpTT5KwULpK5820nY6QgHEVMkaJjt2mIhQXmHFw2U0qgpvcy7araLeDkgI9RcYVH8Lk5ImGlkBwiQCOhB1BB5otZgxuJRBbSS2YLntadi4D3Ks31jkdBOh1B7furNKwLmNfTcCdDG0Ecp9UQu7cVqcHQ8urXcws564DgjbY+Eqz2O8WywIhZ4WSwmfiaHM9TMgjpt7oPcipTdkc0ydBzDuXlPNH7u4NM0+rWiRy7j6IlbOAAp3/E8l3Nll66ozSEbtAI+Q1+n2Q6hSznsN/wBFaweuSHNPIyPR0yPf7qa3YGg5dZefodvklLlLrz/ckMUDLz5esCXFTKqN3cFrg1wIJEgHeJI2+RTFbWcPdUOupyDprv6/1zQDE6Pi3DncgQ0fIa/WU5QdS1uQEJ2lzYSaiJCjrW8alXGtytBPPb5KJ9UOXgxvpL2gxz1XqUTMq7eFrRog4xUTEpymGYXUQR8ZfpN6qXwBvsssqwcpLgxsqEnNaWtpPaGh1U1UZghz6hV2m/RUZbayRIzaxqoaz4CvPqaIDidcgFEpAubGQ2g0hW2rghWX7SlrBqxcUbfmI0XqtLI1pVHuJ62sQeys0K+qE1c4MRorLRJaFD0xaWzQyGl2ynbZrKJytCjfibQYlInOdFk2YyTwoXmdSW9wHbKQ0lQm28jbeI1pVEnoiFJxcYCULS8g6pn4euBOq3MTSKDNFabg6RotqOVuqh8MOdsrFR8tUEwCVjqTqY6F7s1qtps3hWKFVjtNFzPjPiJ7XZWlScD41UqOgkrSPDKnYdsTBhlLZJ1UWbSNlXfZBXLV/lVG7vg10LGQuTYQYJBN5KyiGr3MDp8lXq3YLdEHo3js8ckZKLPc9JcGEcStpB01XnDdyKjXW9UAlmrJ5s7dx9iOiK0XCo0TBdzBG/cEaqE2NEPDi11J4Mtc0n/Q+kKO0BQow15W5GDfvaW1k9vh/hOmm45Tuw6j1B5Fe3kt/vWf4hyI/furFW5y6kS3+Iaj59ELu7ktlzQHMPxAGfbp6ICZnNz/AH4ecimGY3P9+Enr121A05QYIc2eTmmRryMhQ4mQ4U3jYwI9eR+oQuviFJjS4Ohjtwd2uG37IJc8XNy5Wguh2aRpPMx6HVO0sHUY3QHT7fPmsOFVDcRqsqwp1XDkNPqf2UtKtkozuYk+rxI+4SC/imSXBpIOunqZ/VG8N4npO0dqT5xOmoiPv9ESrgKqjMV6X9JLFW8do1WtSKcvOw19Tv8AU/ZQ22HakuIEkmBvqZ1J3Qyje+K6QQGDzDnmPI90bDpEA+p5pN1an67wbAg3HOD8a80NZ+UQI68/67Kha4TVax1Sp5WgEwdXHoI5fNNFvSa3YQvLy28VuXMQJ1jnHL3+yhMSVGQbdecp21rARAxWocphJbLOs6pOoErsVxhNBgl2c9BI1+iC31o0agALWwnEAoIUb9Z5v9msoYRakNElEq1DRDba6AdCO0m5gg12YNmMMpDLAlRp2heOqwEauKICCXtUTCmm+flBlSNZNTfKkdhXib7KK0cJCYqTgAqVajU/4wiG4gW3whlMyiFAtChvhUe13hiSEtcO1bi5NUjy+GcpB3zbkfb3UhGqoXZtt/WXui6RvqW7SNkKqANereA1X1WnT4SQfUbqbFLDQO5oKns3yMYOoRynlWoS3RJd5QrOrbnKm5xLW+YQgle888AbprCEqTlEltQLmGMFpOaBJR7OEDo1S1slAL7iwMeWzslzh6ldyVlWI5xDoPkpkwm4cxwJ2QTBLfM5E7+WhdLiLM3ZzHo5rZp0fDqudoKnuactKQsL4kytAJ2TPYYsKkarnq+DqU2vbSa9Ourga6xUx7ho1XTCMcLcN+FBhMwDYkqF+JMZzCu2OrVKfZjaXGVTm5wrmDWrmfGGKPbWGU6I9iPErScrT2Q2ph3jS481fA0ewbtKoiVcdquVDrCOB3niMBJV2uANRugtpbmiIGyt0LgveG+G6p1a2QSPUAwF6pTGYsu0utTIgDby/b4l3hMNniIe2Kg0/i5fPv6L2zw6m1oc23yO7hrnj/FJ+6jr3hBjLHr+yzKjJVNlX6wq3q6W+smqWrx5qLwR0Jke6A43deE0vcPDcAZIMU3D7K3XqzsAD/KIP01SRxlfu0pnNHxEOJH35JrBYZqlQA+vW35hrMgufnn1gPEMRdVcXOcMuwaJ1Ee5P+aH/iAIk/p1/b6qKvVPIu01G5PyMd1Rq1OZnkNAOYOm+uhJXXU6ItYbRQsdzCLrieknQjpqB+v09vXVDB+nI6fbVBxeA9Rpv880e8691c8aDM7nTXSN/in1gSPqiGlaRmB2Mb+H8cNMhj3jLJ8xEdIk/NPlDFSYygFcho1D66TGnLbtHL/RdH4OuGuY0l2aNiY+oWBxPDIB2loxTa+hjdZNe6HPOn8I/VR4liuQ5WFs89Rp6BSuqyIOoPLSPstBb0+bGR/0j9lzote7D0gyDe59oGusSG5MoPiGJgiAZTPd4hbUgYptcega3U+saJTqMNR7qjolxmBsOgHYCB8lpYUA95lIEkuT3TpKGHsPiSU2WtXRC6dEBEbO3cRsiYlw+phKYyrYTTELrQpTDqlSrAGieqmFtIWWeDNYZAVKOKp0lNhrJfvQZh+GOEEo/aW06LKrw1W6BaYISNasz6ypOVdJpa2nhZuYJWYfaMY55YAM5l0czAE+wClvqwy7oC3GQzcoaI9RTbnIWm1VSx3jBaW7aYIEakn5ndb3FEPInYapUdxMwn4kZtcWaWzKmph6qnMd5DUWGo1Mgx2i57sjBJ+iQ8XtqlvWaXGZ+i6faVg4yELxzh5tw4OcYjaE1g8WKLZH/jbWUqE2y8xAprF1Key5ji9J/iuXV7qy8MZeSC1MLa4zC08FiVpXPIy9RMwEq4Tg76TIGvdA+IjUJgaro3iNyaaaJJvarfHAOxKvhK7PULsIJ8OBSABi1TwivGYtICOYRduYROkJ2pNYWctkMr4cxxgDRXPEO1BV1i64UobqZUueIoaUm4jjFR53MJnxzC4Zo2Ei1DqnMBSpEFlEXxb1LgEw3gnmIJ1Txa1wGpAwl8FHH3xAQ8ZRLvDYV8iwjimIwEHpYm7MMpObYZZmTsBGqrVLguOqv4Bcm3qeKymx74hufMcs7kAEeY7Ty16qyJ2KGwuemgv7ytYl2vePmB4feOAdWquYP4T5nx3nRv1KNXNCoAMjgR/MAT7wl7DOJrqo4N/DsJP8LiNOp6DuSj1y6qRBc1n8USf+4wuZxIq9pdwo8Ba301943RsdAb+d/wAiVbyq9jfNVAPQZQuacUHNWzTOkZuZ229vt0XRKlvT5B7zyJ09hH7JF40tYcHwNNIBn1J7RpK0eFlRVtzPhaNVFOX+h9Il3bhBj11nrGrfVU6tPMO3WRvoTtygohdNDhyO/flMdtB1VHUEEEydOwECZ7f5Lq6Z003iRN9DK2UkgQZ09p/1VsaaHfQGNY10BJ0Ew3TWIHdaMuDOwBgxOhnQHUyDG0H6Hbagyddz+5Os+jtkRiecqoAhC3dpPbT1PL3G39F44NeCwB06EiWx9kisZtG5IkTrrPT/AA9910ThqyaGNa85XADWND302WNxIgUvOMUb3jja0aRHlJnuYKuMoAgg6g9ShlvbPAlpDwrn4iAS4VGRvo4j6LkqgJOhv894ZwesrX3DjX/A4tPQ6j33H1QG/wAOqUNXbbAggg/13R6pcZh5KsfIQfcSEqcRuqtkvknuZ07dvRO4TtGbIze41i1S6jMZthdfO+E1tcGtSPwu+HEnqnRgziFbHIBUtyhcKcy3MpnFxnyA6o7as0koNRwFjanic0a8TSAkq5Q2FP1hKjX0EF4xQc8EN91WwSnXaC2qNtj1THbwquIViNAFC1yV7Ow85VWJawi5xJemk0nMuYYjjD3k6pr45ruiCueuOq6rhWHUU8x3k13N8ssNun9Sj2DY84ENcdEotquzdlcs5Lh6rTrUFZbMIuj2NxO24RfOc0ZUZty86lKvC7iGCeibaNxA6rhcWmVyFEbq3te28r31uXoJUouaYTO6uI1Sbi92fFOUGFOFzNdbQWew1gR9++n/AHb99kFrUHvfm6c0wcTBrapPUoc69blW/Rbuh1G8U7S3cYyrUxl9PQnRHMKxlhEkpKxGgXnTqvBY127TCafCUqiDWxlVxDIxIF4741iLXMMFc5uqcEq9UpV2mHzH0K8r0p2CNhaS0BYG8VxFQ1jci1pTtrnKmbCvONfql6wsy522yK3d2aY6K2IUOcq7yMOjb8ocqhjeitYbaNc4SYbOpAkx2CWLCwubgZmEehTrwxYVGiKjYIWbiCKKEZhfn1Efp0e0bwjhhjqDWEUGkxE6EEn+ZxGqx9B7zLoHQdPQBULvEHUWQ0NgdZ1PVe4FiL6lI1auRrSTliQMo0LnEknUz7LnjScA1B13JuYwP9ZsN5ZfSOrWejnc/RBMXs6UFgGcnRxOo9AOZRwVDUEM0bsXcz6BVq1s1hAGrjt27q9JyjePzeEHe0M5LjeFuovMTkEGYmORBHTUoS8NJJJ/WIkDvy/oyus31iHeWJk+6XLzhRhL4BGx02BytBj1Mn5rpcPxFCoD79YKpRN9IjGmIO0b7+2+867/AD6CRtKfK1pdyjr1GurtOvTknD/dSlzzH58+qJ4ZgrKbQANddTvud0Z+I0wLi5gxSPOCcAwGD4lSTIBjkJ59ZTraWYDZ1gb9R0Poswu3E5SNP6hFqFv4boB0O07ehXP4vFtUY3+CMqAsjtab2atMjqNvmijK5I1aQewJH0VLEy+lTc+mwEt8zmyQC380EfC6NduXeV5Z4xScATLOxH6hZrqXGYC8Gxz8pI6yaZc0AdQP25FLvEeHPczQyBMDomj8VQftVZPUPbPz1VS6c0giQR1GyvQrOrA/ee1dcpnMcNuvDqZTprqujYNXDmgrn2OWQ/EDLzPyTxhTyKcdlq8RCuisNzAYdrXUz3H8bbSG6F4LxGKpjmlHji6d4kckR4Iu6Q0gTz6q/wDgImFz2uTGlqWbLOm2LpC9vyAO6p2GINmFdrNa/YysBlKvrKHR7naIvFNiarCYXLb2zc0kQu939oANpSriGDtcSS1dFw3iIprlO0NUUVbETk7aLimTh3BnOcHEaJrteHmT8KYsNwnIfhTWK4suUhYJKNj3jJsGshABGqOU7WFXZQiCNFcr1wGyVytaoztpJquSe7tKV4xDX2THGdFXusYzGAJUtN5hMrTdF10ngAYr2/DtW4e41yWgHbmY+wQDGsBrU6pbSa9zeUAn6pzrcX0RVMEQUcs8QZUEiCtMYzE0TmZdLaDlF2wSONDrzPOKnDeEFrPO3Xut8Yq06XIJsuHthc941puIMKmGc4mtdtLw4phKdukibiVOp5TEKw7BWhuZpkdFzmlWcx0zzXT+HSa1IA9FrYygcMAynSKhFq7jWUcMawkgwFT4lsGkeqmv8PdQfrMHYobiFw491FJSagdDpBrVCIVYaxt4DouDACE8CI2STwZfDLGyba5JbIKweIAnEG+kfokMgtAXEj5huaA4gF38MnU+yX8Uxp9WoylQYW02lrKTObjo1pd9PT3VnH6zphEOFhTBL3Aue0aNA1E6ad4lO01WlSFQi5ANvP5pEajGpVKA2jhY0clMA8hqep5n0lVLqlu87nYdAt8Mr1ajiajMjQPK3fnpJU9dmd38o+p5/osS5Rzf1jiNYypQtvIXczo3tJiVtfWoax0DSA36yq+HYuyrcOosId4YkkbSTEff2RK+EtA6uA+/6fZXcurgN5+ksWIbWLrqH3VqxoCYdtqfurN5Sip6kfVWW0Q5wIGmx9TJRGq3X0k3FpQtWHNpqRr8kYZUa9sO2KqYhXp28VHnKz4SdfzaDbvHupRDmh9MhzSJBBkHuD/XNCfv2a2nI+MpnDG0nNy1sU6hAn4XH4XDpPI7boHimGmnJaCWciOXY/upOILlr7Z5B89IF+U6Oyj4tOkSfkFzuz4nqE5Q90dA4x7JzBYOpUBZOW4MHnCHWE6lg7xM4JTHb3ADYcUFp38t0BQPE72r+ULQNF63dbS081ZUEZqrabn5oE9UXs8QZGVusBJWBveW+ZF8GztcZG5nuULEYcWIJ2gKLnNfrA3F2HOqPloRbhHAQxsnc7q1ibKr9WN9yvcJvXt8roCu9eo2HCKRG1KBrm8IYlSytMITwviVZ1wWPdDBrruTyCvYjiLQ0lx2XOL7EXuqFzCWjspweGatTZCOW55QNfEil+p2i6xNjntpM1J1Mch3WVbUErnfBuJPDoguJOrj09U23uN5NCVn18E9Gp2af3CUKwZMw0hGhTDSTyCI1bpjaeeRCQBxW1jHgySdkK/tN9WiWB59EZeFVapu2gBHrBVcSmkYsQ4/ojyt1RTBMVFzPNcrscLJqBrtp1XVsHtGUaYygDRGx+EoYZAqA5jK4arUqtytLlTC6eaVFcua10Sk/ibjM035W8kvf71vf5pVKPDMRUUMdow7qugOsX20/ddG4LY4MEpfwrh4yC5dKwrC4pnLAeBseWnPunuKYxMmQSU/1DO3oOZm1UaIDitsHghMF7RLKbHanM5rS3nFQwCO+yV8arPp3X4doL3GMgA1cHCRp/WxWThBmbunx9pLVgN4o3vD0umE18M0/CbC2xtzaFRtMkF3htc8bw8zLfsfmhf9rADRaj1KmJpAcjKK9NTcS5xPeNc0t57hLDInVU8axAuqSEOqXpWjhcKadMATPrvncmO2Gva3zN+ia7LES5qQeHr4aNImU/UKAyghZOPQK1njeFcEWBgrFqjB5nbKpg+P+HVikw1J3DBJ9VQ41uhlLQdUH4PtqwqgtdE7nsmKeFRsMWfpsdoAoe37vvOzUb4uAluQmBryncn0EpT4+4o8NhpUOYhzx06N/dHgwhmpkrnfG1E7rL4dh6T1xmGnTlNRqYVCw5S5/srcf/UOjmzzSZM5vL6CAf8AEi+McQh15RFOoHMtnRWAInM4ZXkjmGA7jnmSVgnErrW2q0qTB4lR0h5jyDIBIHN2mnId9kt03ua8PaSHAzmnWes81tnhzV8TUq1NBsvjcWv7be/KJPqoANuf1vO7cXXDKdPO8kNAEwCT5TOgGs9FTw3iE/hHuqANrU3BrwSQ1z/ynQGA4jp1S5fcSGrRoh4IqNZJEeR5dk8M++45obTpOfRe45i0iHhoJcADNOoANSWuAnnDndAsylgwKCrV5N768vMD3t4ySSblNwPh9PtePF3dDELCoKf/ABQ0OLGkEh7SHZWk7h0QDpvyKUODOKnW7hTqS6i495pkncTy6j5+q9h2JVKeV7HuG+rSQeWxUd1UJc5xIJcS4mIBkyTlG2vILQp8NVFei2qE3HUH5a31veZj175XXcfadFx2zFd5gkNEgRoYMiPmD9VRs8LpURo0fqhdDiQimwvILiCCQI1aY265cnuqt9xACN0vTw9cDs+Q0mga1NhnjSLujtICXMbbmcBTcEvvxIuKPcP2FW5PkGg3PIFNmiKC52sIm9XObDWXrNlYMhrR/wBUr2ljbaOrzmcNwNYRe/4ermnka/L3QCpwrUpsLXPaSeYH3SdOpQq3zsN9h+4VaNc8oWpcQsqtkHLKqvzgl0ktOxhT4JwhSyS+q1w3LROf2Me+qbm0LbKGlriBGhjl6JarXoUmtSBI56fuNCjXYd47TluM1CQdSVJgGG0XsL6h+CCROhaTE9oMDvmC6NVwWzftTpmeRGv1SjiOAOp1/wC6ovFCo19KqG/lziWPHbMG6/l1mNCWaXEFqIaa3U+gv4eZ5eMBUw5Rs7C/hCNjf24GRkdAAgWKP8SrDTpzWvC3CdzTqu8ds0QWup1MwDfFbUY2lInMGnM7M2OWuwRaywBjSYu2VKgPmDgGNc7mGuzHWZ/yRlw60qjFTfTTXe/29ZBrF1AItJsHwKmG5qgDieR5IHxDZspuzUhl6gbeyO/2nDnUj5HtkFrtNu+3utKZtXa1agnp5jB6aBARqyP2j3I6DWWc0WTKLA9TpFiyrvzNytJJOi6dQtiaYDtDGqB4PaUy+bcB5P8A2jqZ+Ed1JjmK1bdpcQ0tBAdlJJbOgJBA0mBIlUxhq4llyi1uumvSXwSqgJZxrFziThEVazS3Qfm7oFiODtpvygaAJzt8dbUEqKo1rjKNSxNdAFfYaRp6KnURi4Ypsq+YiDEj6aoo5zKAfLt4drp0Ee4+qq2PgUg5tMnONAXR5hoZZyLYI2+a5/8A7RcWfnbTzQAM31IE+31WZTwrYnEmmDYfrp18IMWYh25TpdDF6Tycr2uiAI117K1Qs6Ye6o1ozugF8CYAADZ6QAvne2xGsx5LJEaBwPPU7DUCfuu4cL3RrUabqgcSWgwJDduiniHCzhFDBrgyxRHW45SPGMApspVqjKBubioHCXlpcXOEbuIaxo02jQaclxq7FWm806jXNe3RzToQYB1+RB+a73in4jIRbCkDG75+gAj3XGcfw24bXcbgOFV3mcXQcw2DgRoRpGm0RyTvA69ywcj1JzaeG1gL8tPKZuJWwFvn/YveGSZKs0aDdyiLcL0klesoUxuug7TNtFLsJrh1QB4A2XQLO9GSJ5JEmnrGnorFDEC3SVm4qj23pHMM4T1m/EFrnqTMpj4TrWtFk1CBU7/YJco3OdyYMGtKAfmrCSNp2QMV/wCPZtfTpvH6ABuRG01DVbLdG8kt45hmdpCY7a68TRghg58vktL6iNgsajUNJ9NPnOOoRbKZx7EcJfSOgkKgaTj+Urq11ZNd0VP+zWzsF0FPifd7w1gHwwvoYBw23zGg1w18H2LWug/QJqwK0yQByQ+nSi9pN/8AaP8A4vTFZt1jms3F1iw8CL/Uz1BQubz/AAJrxDgFO5pZRlZUGrXRuejo5Hry9weV31pUpPdSqNLXAzB69RyIMbjoF1PFcaZSIa/R247qW8t7e9ohtQAmPK4RnaeoP6c1GDxdTDKM4JQ/Ty6jw9ojiMOtViUPe+exnH6lMvp6cngj/E10/wDi32Cpvo9ZXSsN4e/D1XtrAVKbhLX7eZpJGYcjDnewUF/VsqZ8rWz7/dbiY1D/AA18okMOwUA6ecUMGwKvWINOk5zeugHuV1Lhqyq27Ie1rR0CXsG4wDHCkxmaTAhOVzcOc2SNeixuJV67nJUUBTt1mhgsOl7g36xR464rqUW+QQUgXnGly9sEp14mwo1tXJHfw0+TC1OGphFpDMBcRmuKgPd2hXhnix0gVawpuaQW52k0nj8zHObqw9HQQun4HeU7lpdTcx0GCGPzx01gaH0XJrPhc/mXSuDsC/DjxIAcRDP5WndxHU7AeqT4smH1em1jyHL5z5z1PtANYdr02NHnMdp+3VVm3dCDle5p9cunz0U1eizckuP9c4Qy8axoJcPkIWLTUNoSYx/JbXMR8WxearqgfVJEhmYyCCIJjpB6ILcYlWeQSDBJhzZGYjeQdCdeo3RHilzQCWUnTzzbx2IAg+soLiNUCjQaw+UB7nmf+Y4gkbcgGj5LrcKi5Vsu+nlYHp8uZzmJBVmz8ukdLyxr3Ao3NDL4whtRjnBhcB+YFxgkH6O/lRW54aa5ocXU6D93B1RpbruIbMeiTOHsVa8eA4hszlc7YOjTbkiljYOcK34guHwtZBG+YEubyggAA9HFDrLkszaW08wT9RCUitQWte/36jxjFgtt4Tsrri3LHgioA52h1DXAOaJjTnqqj6JYIqw+mc7JBlrm/C4SOx37pRxCiGbAx6mVdwPGSxpa4F9I/ED+X+YHr390JsOHGZfn10nmoWGUaessXOG1KL8lIOqhxinA12kB3QxrO2hOkGN6VveR5qNSe0ER6tdCbMJxJng5SKTtml2SA9kEskjVhj1Eg9lTq2QJllQBvISNO3lMITVSTY5b8yev0jJxFUKCR9x8+dZFwNiguLZpqUm56TntFQgHNmILi0n4ToJA7KHjjBfGZnYPMyT3c2NR+o9ED4Ku/wC9Y23DW0pqMqCTOxIfDnEyXCBrIzjunvEquSi9wBdlBMAEkmNBHMpSvmo4vMl99AeVzax1PsNITDuOzsZzTD+F6xqNFRpDJknSY3j+tl17BnBjGtEAAADf6qpSoAqzdBwpVHNA8RjSROxIBIBjkYjtJSmNxjYqwf5fnGxlVSJrxRWuGUXVaNbLlElsMIIAl0EiQQAT8lyzE7+pVqeI95e4iJJ6cuwW3F/FTrhlNvh5MhcT5swJIAEaCOfulqjemVscN4c9KnmcC+vIXt5jfrMqvWW+UQ0/ECAQg1zdmd0Qe5rm90GrskwtSgi32gXvaWaVUyCERrvhsoba0YIkq1d1xEKXF2AEqpAE9wfEQ1+qfqeLUSwbbLlUayrti5z3hmfLOgJmJ5Axsg4rBJV717WjFDGmmLWnR7jjZtNmVjdfor1txOzwWvqAy+coA1iYkzsFz6lZvBJrN8rRuD5XunRuYa9SdjDTtut/xzySHeaYiIADQIAFOOkRyELPbh1Aiyjncm/zz+aeq8RqDVf6jnb3Oerma7Qj4Tv6jkRuiNxWDYnmkq2xOnTcPNruGgFz2u3B00E6aE/oi11iFCtS8QVKjC06Uy1gLgJnK8vgN0OpHLnzBUwhzjQ28vnznL4bGtlYPvvCFYxfUv8A4z/4vVG9xh1N8zqNuhCXLniSr4ragyHKIDcuka6ZiJPPWeafrTAqddjHgSHAObI5OAI+69VpDDBTW2It9/3CU6hxObszaxvrFy6xN125uZu2yYcFtHU9RMckXo8NMaBA2XPuJq1V1w9uZ0NcWgAmGiY0AQaTJiiaVI5VA856rUGHXOwzMTuNPnzzjFxRiWVhGsrl+I1TJJlMtHHbgeV3h1ABHnGYx0ndDq1mKjw9oGUnX+V3NvNauBp/4/db3B3idSv2zXHtBuB3lWnVDw0nku1YJd5qYdUIBI26JLoYeyi3M9sGNJEem694bvDWugHOhjQTHKdgleI5cUpcC2Uan8RujVNMhevL8xuxJgOyEiz7I/iFxSAnMNEJscVpuMczssmiz5LqDNNnF7EyKnadAi1pfOpDKWhw5Zp26DVQ215SFXIXCd0E4lvj+IYGGWgGY+iuENdsjDS15So4C3PW0af7Vo1ID69FhP8Ayw5oPpqZJ+SH3dImoHN0aPhHMmIzHokinXqtu2upBhe8eGA4aa6kzuIifQI9h/GFuKrm1gRT2a8AnUTJLGyYOkRKv/gvS1pjNpew3+dOZgkxSAG+nL5+emkl4iw5rqD5nMRDSN8x0ELlV0x9GWk7mYcJGmk6/PVdhu6uarI1a2Y+eg/rskDivDXufniZ+I8hroB3Wnwqvl7j7HX/AJ85mB4hSJUH5aK7Lh0hwhsagAaE955JpwrFX1Leq15Ln5S8GYcPDacoaNiNSCO8jZKNZhaSXK/hT3B5dyyGfmIH1hbVemrJfTT5aZCPl1Ev0sRLhDtU0YHajwuk7dUsMswW5mmT0RXBbt5cG7RzWfikBQ5NI3hK2V7NryjBZPbQOYNmk4RVZpLNY8RnaT8ieiy5wWHGHZmnVjp+Jp1BWuE3ANU/maBBB2cDo4HsRovaeN1LWaLRmYCTTME+Q6t1SILFrX16xxsqi/I/f/sWuGMFqNr1ctapScQ7w8s6kwS1wGv8s8swPq/2oa60pBxzZmsLoOpdzknbzA99FixCx7l3Vj1H0B/X36xJdEqeEscS4v8Ag7NtdoaamemGA7O1Be3/AOjKuq1xriyi2yZdMBPjsdTY3TSo5p0dr+UseDHMLxYlMPhKdRKbNuahU+Vtvp9TGe0Nj/8AIPubTkF+cwlVbcLFi65f4TP3aXPDUbbeSvViEGMo7TLpjmaEEKg55JWLEWibreDYWJEK29uwhSU7IA5hs3VeLEIk6wthaWHXf9zE6moTtPwMEf8A6O/oIc+qTrsO2k+vZYsXqagAnxP6i76ew/c2tLYnWDlGrjrAA1IkRr06mFs6u4nPtsQOQAiGgdAsWKQczG/lLqNJHXeNpnfkB9l3LgthZZ2+Yf8AKYe+rQR9F4sWFx//AM6Y6mPcPHfby/MIX+KNZpO+g+a5ZxrcEXL/AA2ZScpJOpMtGrW7R315rFiBwmii9/naMcSAVFA6/gxbFZ41e8gHkefo2Fdw/iZtu2p4dHM9wgOefICDvk5kaR0WLF0qU1cEETJViuo3la0xB+r3Znl3/EknzT33MclK/M2HsJh2x2PcGOYXixBqAK2nW0qp1k9lXdINQkieZVrGrnKA+lodl4sQSoNRTNFe6mkXadS4c7xCSD1nkmLDqjspcfMV4sVsQ112GmkEGIaUWXlRtfxANQHAT/OxzSfUByO8P4FSYwXNzWpho1a0uETyzdT2+6xYlsa5VVC6ZrKbb2Fz+/eHwoDMxbXKLjzjfQpaZuuqq4nYB4y9TJ/ZYsWErkNcTYGupiSLFlOs59Wm1zmmKZLdtNCeTj0naFUZaAu6Eu17jl916sXRI5IzdQJz+JH+0ryhethjKQzazyA5oHRucjju3fdYsUYQmopzay1dArC2kY+CmeI9xBJEx6oxfWcPIa4gdBMLFizcWxGJYDoJo4c/6xP/2Q==" alt="Sunflower">
+        <p>Sunflowers, with their vibrant yellow petals and tall, imposing stems, have a history rooted in ancient civilizations. Believed to be native to North America, sunflowers were cultivated by indigenous peoples for their numerous practical uses. The sunflower, scientifically known as Helianthus annuus, derives its name from its remarkable characteristic of turning its face towards the sun throughout the day, a phenomenon known as heliotropism. In the 16th century, European explorers brought sunflower seeds back to Europe, where they gained popularity as ornamental plants and a valuable source of oil. Sunflower oil, extracted from the seeds, became a staple in cooking and was also used in traditional medicine for its various health benefits.</p>
+
+        <p>Today, sunflowers are not only valued for their beauty but also for their agricultural importance. They are cultivated worldwide for their seeds, which are a nutritious snack and a vital ingredient in cooking and baking. Sunflower oil is widely used in the food industry and is also a renewable source of biofuel. Additionally, sunflowers continue to be a symbol of happiness, positivity, and adoration. Their cheerful appearance and ecological significance, as they provide food for birds and insects, make sunflowers a beloved flower in gardens, bouquets, and various cultural contexts around the world.</p>
+    </section>
+
+    <section id="orchids">
+        <h2>Orchids</h2>
+        <img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREOTqUhWF0buLFJkRNw3WwUt01dnvXmjs9dw&usqp=CAU" alt="Orchid">
+        <p>Orchids, one of the most diverse and captivating flower families, have a fascinating history and cultural significance. With over 25,000 to 30,000 natural species and more than 100,000 hybrids, orchids are renowned for their stunning beauty and unique structures. Originating millions of years ago, orchids have evolved into intricate, highly specialized flowers. They are found on every continent except Antarctica, adapting to a wide range of habitats, from tropical rainforests to arid deserts. Orchids have held symbolic meanings in various cultures throughout history. In ancient Greece, they were associated with love and fertility, while in China, they represented refinement, friendship, and elegance. During the Victorian era in England, orchids symbolized luxury and were highly coveted, leading to the orchid craze known as "Orchidelirium."</p>
+
+        <p>Orchids have been cultivated and hybridized for centuries, leading to the creation of countless hybrids and varieties. They are not only prized for their aesthetic appeal but also for their scientific significance. Orchids have unique reproductive strategies, including mimicry and specialized pollination mechanisms, making them a subject of fascination for botanists and researchers. Additionally, orchids play a vital role in ecosystems as they form symbiotic relationships with fungi and provide habitats for various insects and animals. With their mesmerizing colors, intricate patterns, and enchanting fragrance, orchids continue to captivate enthusiasts, making them one of the most cherished flowers in the world.</p>
+    </section>
+
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Welcome to Blossom Haven, where passion meets petals! We are a dedicated team of floral enthusiasts and horticulturists committed to spreading the joy of flowers across the world. Founded with the vision of celebrating nature's artistry, Blossom Haven curates a diverse collection of exquisite blooms from around the globe. Our journey began with a profound love for flowers, and that love blossomed into a business that aims to inspire, educate, and connect people through the language of flowers.</p>
+
+        <p>At Blossom Haven, we take pride in sourcing the finest and most unique flowers, ensuring that every bouquet and arrangement tells a captivating story. Whether you're celebrating a special occasion, expressing your deepest emotions, or simply adding a touch of elegance to your space, our carefully crafted floral creations are designed to leave a lasting impression. We believe in the power of flowers to brighten lives and create memorable moments. Join us in this floral adventure, and let the beauty of Blossom Haven enrich your world with the enchanting allure of nature's wonders.</p>
+    </section>
+
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" required></textarea><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+    <!-- Lightbox markup -->
+<div class="lightbox" id="lightbox">
+    <img src="#" alt="lightbox image">
+</div>
+
+<!-- Scroll to top button -->
+<button class="scroll-to-top-button" onclick="scrollToTop()">Scroll to Top</button>
+
+<script>
+    // JavaScript for smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const images = document.querySelectorAll('img');
+
+    images.forEach(image => {
+        image.addEventListener('click', function () {
+            lightbox.querySelector('img').src = this.src;
+            lightbox.style.display = 'flex';
+        });
+    });
+
+    lightbox.addEventListener('click', function () {
+        lightbox.style.display = 'none';
+    });
+
+    // Lazy loading for images
+    document.addEventListener('DOMContentLoaded', function () {
+        const lazyImages = document.querySelectorAll('img');
+        const options = {
+            rootMargin: '0px 0px 50px 0px',
+            threshold: 0.1
+        };
+
+        const imageObserver = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    const image = entry.target;
+                    image.src = image.dataset.src;
+                    imageObserver.unobserve(image);
+                }
+            });
+        }, options);
+
+        lazyImages.forEach(function (image) {
+            imageObserver.observe(image);
+        });
+    });
+
+    // Scroll to top button functionality
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior:'smooth'
+            });
+        }
+
+        window.addEventListener('scroll', function () {
+            const scrollButton = document.querySelector('.scroll-to-top-button');
+            if (window.scrollY > 200) {
+                scrollButton.style.display = 'block';
+            } else {
+                scrollButton.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+
+</html>
